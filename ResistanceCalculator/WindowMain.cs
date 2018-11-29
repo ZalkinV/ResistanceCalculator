@@ -55,13 +55,15 @@ namespace ResistanceCalculator
 			comboBoxConductorMaterial.DataSource = materials; //Связываю comboBox и List с материалами
 			comboBoxConductorMaterial.DisplayMember = "Name"; //Выбираю поле для отображения у класса, из элементов которого составлен List
 			comboBoxConductorMaterial.ValueMember = "Resistivity"; //Выбираю поле для значения у класса, из элементов которого составлен List
-			
-			pictureFront.CellSquare = trackBarScale.Value == 0 ? 1 : Convert.ToUInt32(Math.Pow(trackBarScale.Value,2));
+
+			pictureFront.CellSquare = trackBarScale.Value == 0 ? 1 : Convert.ToUInt32(Math.Pow(Math.Pow(pictureFront.CellRowCount, 2), trackBarScale.Value));
 			pictureSide.CellSquare = pictureFront.CellSquare;
 			pictureFront.CellRowCount = Convert.ToInt32(pictureBoxFront.Width / pictureBoxScale.Width);
 			pictureSide.CellRowCount = pictureFront.CellRowCount;
 			pictureFront.PixelInCellCount = Convert.ToInt32(Math.Pow(pictureBoxFront.Width / pictureFront.CellRowCount, 2));
 			pictureSide.PixelInCellCount = pictureFront.PixelInCellCount;
+
+			PrintScales();
 
 			toolStripButtonCurrent = toolStripButtonPencil;
 		}
@@ -88,7 +90,6 @@ namespace ResistanceCalculator
 
 		private void pictureBoxFront_MouseMove(object sender, MouseEventArgs e)
 		{
-			 
 			pictureFront.Action_MouseMove(e);
 		}
 
@@ -167,6 +168,13 @@ namespace ResistanceCalculator
 
 			pictureSide.CellSquare = pictureFront.CellSquare;
 
+			PrintScales();
+		}
+
+		private void PrintScales()
+		{
+			labelTrackbarScaleMin.Text = trackBarScale.Minimum == 0 ? "1" : trackBarScale.Minimum.ToString();
+			labelTrackbarScaleMax.Text = Convert.ToUInt32(Math.Pow(pictureFront.CellRowCount, trackBarScale.Maximum)).ToString(); //Взято из trackbarScroll
 			labelScaleMax.Text = Convert.ToInt32(Math.Sqrt(pictureFront.CellSquare)).ToString() + " мм";
 		}
 
@@ -191,9 +199,8 @@ namespace ResistanceCalculator
 		private void CalculateResistance()
 		{
 			pictureFront.CalculatePixelCount();
-			pictureFront.CalculateSquare();
-			pictureSide.CalculatePixelCount();
-			pictureSide.CalculateSquare();
+			//pictureSide.CalculatePixelCount();
+			//pictureSide.CalculateSquare();
 
 			textBoxPixelsCount.Text = "";
 			textBoxSquares.Text = "";

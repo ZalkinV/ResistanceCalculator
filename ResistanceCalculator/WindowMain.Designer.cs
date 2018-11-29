@@ -52,8 +52,8 @@
 			this.textBoxSquares = new System.Windows.Forms.TextBox();
 			this.labelSquare = new System.Windows.Forms.Label();
 			this.panelColor = new System.Windows.Forms.Panel();
-			this.labelTrackbarMin = new System.Windows.Forms.Label();
-			this.labelTrackbarMax = new System.Windows.Forms.Label();
+			this.labelTrackbarScaleMin = new System.Windows.Forms.Label();
+			this.labelTrackbarScaleMax = new System.Windows.Forms.Label();
 			this.labelPixelCount = new System.Windows.Forms.Label();
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.toolStripButtonPencil = new System.Windows.Forms.ToolStripButton();
@@ -79,13 +79,16 @@
 			// 
 			// tabControlField
 			// 
+			this.tabControlField.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControlField.Controls.Add(this.tabPageFront);
 			this.tabControlField.Controls.Add(this.tabPageSide);
-			this.tabControlField.ItemSize = new System.Drawing.Size(202, 18);
+			this.tabControlField.ItemSize = new System.Drawing.Size(250, 18);
 			this.tabControlField.Location = new System.Drawing.Point(12, 39);
 			this.tabControlField.Name = "tabControlField";
 			this.tabControlField.SelectedIndex = 0;
-			this.tabControlField.Size = new System.Drawing.Size(408, 426);
+			this.tabControlField.Size = new System.Drawing.Size(508, 526);
 			this.tabControlField.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.tabControlField.TabIndex = 0;
 			// 
@@ -94,7 +97,7 @@
 			this.tabPageFront.Controls.Add(this.pictureBoxFront);
 			this.tabPageFront.Location = new System.Drawing.Point(4, 22);
 			this.tabPageFront.Name = "tabPageFront";
-			this.tabPageFront.Size = new System.Drawing.Size(400, 400);
+			this.tabPageFront.Size = new System.Drawing.Size(500, 500);
 			this.tabPageFront.TabIndex = 0;
 			this.tabPageFront.Text = "Поперёк";
 			this.tabPageFront.UseVisualStyleBackColor = true;
@@ -105,7 +108,7 @@
 			this.pictureBoxFront.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pictureBoxFront.Location = new System.Drawing.Point(0, 0);
 			this.pictureBoxFront.Name = "pictureBoxFront";
-			this.pictureBoxFront.Size = new System.Drawing.Size(400, 400);
+			this.pictureBoxFront.Size = new System.Drawing.Size(500, 500);
 			this.pictureBoxFront.TabIndex = 1;
 			this.pictureBoxFront.TabStop = false;
 			this.pictureBoxFront.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxFront_Paint);
@@ -118,7 +121,7 @@
 			this.tabPageSide.Controls.Add(this.pictureBoxSide);
 			this.tabPageSide.Location = new System.Drawing.Point(4, 22);
 			this.tabPageSide.Name = "tabPageSide";
-			this.tabPageSide.Size = new System.Drawing.Size(400, 400);
+			this.tabPageSide.Size = new System.Drawing.Size(500, 500);
 			this.tabPageSide.TabIndex = 1;
 			this.tabPageSide.Text = "Вдоль";
 			this.tabPageSide.UseVisualStyleBackColor = true;
@@ -129,7 +132,7 @@
 			this.pictureBoxSide.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pictureBoxSide.Location = new System.Drawing.Point(0, 0);
 			this.pictureBoxSide.Name = "pictureBoxSide";
-			this.pictureBoxSide.Size = new System.Drawing.Size(400, 400);
+			this.pictureBoxSide.Size = new System.Drawing.Size(500, 500);
 			this.pictureBoxSide.TabIndex = 0;
 			this.pictureBoxSide.TabStop = false;
 			this.pictureBoxSide.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxSide_Paint);
@@ -139,8 +142,9 @@
 			// 
 			// trackBarScale
 			// 
+			this.trackBarScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.trackBarScale.LargeChange = 2;
-			this.trackBarScale.Location = new System.Drawing.Point(93, 515);
+			this.trackBarScale.Location = new System.Drawing.Point(93, 615);
 			this.trackBarScale.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
 			this.trackBarScale.Maximum = 4;
 			this.trackBarScale.Name = "trackBarScale";
@@ -150,8 +154,9 @@
 			// 
 			// labelScale
 			// 
+			this.labelScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelScale.AutoSize = true;
-			this.labelScale.Location = new System.Drawing.Point(13, 515);
+			this.labelScale.Location = new System.Drawing.Point(13, 615);
 			this.labelScale.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
 			this.labelScale.Name = "labelScale";
 			this.labelScale.Size = new System.Drawing.Size(78, 13);
@@ -160,8 +165,9 @@
 			// 
 			// pictureBoxScale
 			// 
+			this.pictureBoxScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.pictureBoxScale.BackColor = System.Drawing.Color.Transparent;
-			this.pictureBoxScale.Location = new System.Drawing.Point(16, 467);
+			this.pictureBoxScale.Location = new System.Drawing.Point(16, 567);
 			this.pictureBoxScale.Name = "pictureBoxScale";
 			this.pictureBoxScale.Size = new System.Drawing.Size(50, 15);
 			this.pictureBoxScale.TabIndex = 2;
@@ -170,8 +176,9 @@
 			// 
 			// labelScaleMin
 			// 
+			this.labelScaleMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelScaleMin.AutoSize = true;
-			this.labelScaleMin.Location = new System.Drawing.Point(13, 485);
+			this.labelScaleMin.Location = new System.Drawing.Point(13, 585);
 			this.labelScaleMin.Name = "labelScaleMin";
 			this.labelScaleMin.Size = new System.Drawing.Size(13, 13);
 			this.labelScaleMin.TabIndex = 4;
@@ -179,8 +186,9 @@
 			// 
 			// labelScaleMax
 			// 
+			this.labelScaleMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelScaleMax.AutoSize = true;
-			this.labelScaleMax.Location = new System.Drawing.Point(54, 485);
+			this.labelScaleMax.Location = new System.Drawing.Point(54, 585);
 			this.labelScaleMax.Name = "labelScaleMax";
 			this.labelScaleMax.Size = new System.Drawing.Size(32, 13);
 			this.labelScaleMax.TabIndex = 5;
@@ -188,7 +196,8 @@
 			// 
 			// buttonCalculateResistance
 			// 
-			this.buttonCalculateResistance.Location = new System.Drawing.Point(426, 330);
+			this.buttonCalculateResistance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonCalculateResistance.Location = new System.Drawing.Point(526, 330);
 			this.buttonCalculateResistance.Name = "buttonCalculateResistance";
 			this.buttonCalculateResistance.Size = new System.Drawing.Size(154, 23);
 			this.buttonCalculateResistance.TabIndex = 6;
@@ -235,7 +244,8 @@
 			// textBoxPixelsCount
 			// 
 			this.textBoxPixelsCount.AcceptsReturn = true;
-			this.textBoxPixelsCount.Location = new System.Drawing.Point(432, 384);
+			this.textBoxPixelsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxPixelsCount.Location = new System.Drawing.Point(532, 384);
 			this.textBoxPixelsCount.Multiline = true;
 			this.textBoxPixelsCount.Name = "textBoxPixelsCount";
 			this.textBoxPixelsCount.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -276,7 +286,8 @@
 			// 
 			// buttonClearField
 			// 
-			this.buttonClearField.Location = new System.Drawing.Point(322, 471);
+			this.buttonClearField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonClearField.Location = new System.Drawing.Point(422, 571);
 			this.buttonClearField.Name = "buttonClearField";
 			this.buttonClearField.Size = new System.Drawing.Size(98, 23);
 			this.buttonClearField.TabIndex = 16;
@@ -286,6 +297,7 @@
 			// 
 			// groupBoxConductor
 			// 
+			this.groupBoxConductor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBoxConductor.Controls.Add(this.textBoxSquares);
 			this.groupBoxConductor.Controls.Add(this.labelSquare);
 			this.groupBoxConductor.Controls.Add(this.panelColor);
@@ -295,10 +307,10 @@
 			this.groupBoxConductor.Controls.Add(this.labelResistivity);
 			this.groupBoxConductor.Controls.Add(this.numericConductorLength);
 			this.groupBoxConductor.Controls.Add(this.labelСonductorLenght);
-			this.groupBoxConductor.Location = new System.Drawing.Point(426, 57);
+			this.groupBoxConductor.Location = new System.Drawing.Point(526, 61);
 			this.groupBoxConductor.Name = "groupBoxConductor";
 			this.groupBoxConductor.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
-			this.groupBoxConductor.Size = new System.Drawing.Size(246, 267);
+			this.groupBoxConductor.Size = new System.Drawing.Size(246, 263);
 			this.groupBoxConductor.TabIndex = 17;
 			this.groupBoxConductor.TabStop = false;
 			this.groupBoxConductor.Text = "Характеристики проводника";
@@ -330,28 +342,31 @@
 			this.panelColor.Size = new System.Drawing.Size(21, 21);
 			this.panelColor.TabIndex = 15;
 			// 
-			// labelTrackbarMin
+			// labelTrackbarScaleMin
 			// 
-			this.labelTrackbarMin.AutoSize = true;
-			this.labelTrackbarMin.Location = new System.Drawing.Point(100, 547);
-			this.labelTrackbarMin.Name = "labelTrackbarMin";
-			this.labelTrackbarMin.Size = new System.Drawing.Size(13, 13);
-			this.labelTrackbarMin.TabIndex = 18;
-			this.labelTrackbarMin.Text = "1";
+			this.labelTrackbarScaleMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelTrackbarScaleMin.AutoSize = true;
+			this.labelTrackbarScaleMin.Location = new System.Drawing.Point(100, 647);
+			this.labelTrackbarScaleMin.Name = "labelTrackbarScaleMin";
+			this.labelTrackbarScaleMin.Size = new System.Drawing.Size(50, 13);
+			this.labelTrackbarScaleMin.TabIndex = 18;
+			this.labelTrackbarScaleMin.Text = "minValue";
 			// 
-			// labelTrackbarMax
+			// labelTrackbarScaleMax
 			// 
-			this.labelTrackbarMax.AutoSize = true;
-			this.labelTrackbarMax.Location = new System.Drawing.Point(266, 547);
-			this.labelTrackbarMax.Name = "labelTrackbarMax";
-			this.labelTrackbarMax.Size = new System.Drawing.Size(31, 13);
-			this.labelTrackbarMax.TabIndex = 19;
-			this.labelTrackbarMax.Text = "4096";
+			this.labelTrackbarScaleMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelTrackbarScaleMax.AutoSize = true;
+			this.labelTrackbarScaleMax.Location = new System.Drawing.Point(266, 647);
+			this.labelTrackbarScaleMax.Name = "labelTrackbarScaleMax";
+			this.labelTrackbarScaleMax.Size = new System.Drawing.Size(53, 13);
+			this.labelTrackbarScaleMax.TabIndex = 19;
+			this.labelTrackbarScaleMax.Text = "maxValue";
 			// 
 			// labelPixelCount
 			// 
+			this.labelPixelCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPixelCount.AutoSize = true;
-			this.labelPixelCount.Location = new System.Drawing.Point(432, 368);
+			this.labelPixelCount.Location = new System.Drawing.Point(532, 368);
 			this.labelPixelCount.Name = "labelPixelCount";
 			this.labelPixelCount.Size = new System.Drawing.Size(117, 13);
 			this.labelPixelCount.TabIndex = 20;
@@ -369,7 +384,7 @@
             this.toolStripDropDownConductor});
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
-			this.toolStrip.Size = new System.Drawing.Size(684, 31);
+			this.toolStrip.Size = new System.Drawing.Size(784, 31);
 			this.toolStrip.TabIndex = 21;
 			this.toolStrip.Text = "toolStrip1";
 			this.toolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip_ItemClicked);
@@ -465,12 +480,12 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(684, 576);
+			this.ClientSize = new System.Drawing.Size(784, 676);
 			this.Controls.Add(this.toolStrip);
 			this.Controls.Add(this.pictureBoxScale);
 			this.Controls.Add(this.labelPixelCount);
-			this.Controls.Add(this.labelTrackbarMax);
-			this.Controls.Add(this.labelTrackbarMin);
+			this.Controls.Add(this.labelTrackbarScaleMax);
+			this.Controls.Add(this.labelTrackbarScaleMin);
 			this.Controls.Add(this.groupBoxConductor);
 			this.Controls.Add(this.buttonClearField);
 			this.Controls.Add(this.textBoxPixelsCount);
@@ -532,8 +547,8 @@
 		private System.Windows.Forms.Panel panelColor;
 		private System.Windows.Forms.TextBox textBoxSquares;
 		private System.Windows.Forms.Label labelSquare;
-		private System.Windows.Forms.Label labelTrackbarMin;
-		private System.Windows.Forms.Label labelTrackbarMax;
+		private System.Windows.Forms.Label labelTrackbarScaleMin;
+		private System.Windows.Forms.Label labelTrackbarScaleMax;
 		private System.Windows.Forms.Label labelPixelCount;
 		private System.Windows.Forms.ToolStrip toolStrip;
 		private System.Windows.Forms.ToolStripButton toolStripButtonPencil;
