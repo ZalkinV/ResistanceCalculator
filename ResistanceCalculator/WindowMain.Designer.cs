@@ -41,10 +41,9 @@
 			this.labelScaleMax = new System.Windows.Forms.Label();
 			this.buttonCalculateResistance = new System.Windows.Forms.Button();
 			this.labelMaterial = new System.Windows.Forms.Label();
-			this.labelСonductorLenght = new System.Windows.Forms.Label();
+			this.labelСonductorLength = new System.Windows.Forms.Label();
 			this.comboBoxConductorMaterial = new System.Windows.Forms.ComboBox();
 			this.labelResistivity = new System.Windows.Forms.Label();
-			this.textBoxPixelsCountFront = new System.Windows.Forms.TextBox();
 			this.numericConductorLength = new System.Windows.Forms.NumericUpDown();
 			this.labelResistance = new System.Windows.Forms.Label();
 			this.buttonClearField = new System.Windows.Forms.Button();
@@ -54,7 +53,6 @@
 			this.panelColor = new System.Windows.Forms.Panel();
 			this.labelTrackbarScaleMin = new System.Windows.Forms.Label();
 			this.labelTrackbarScaleMax = new System.Windows.Forms.Label();
-			this.labelPixelsCount = new System.Windows.Forms.Label();
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.toolStripButtonPencil = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonLine = new System.Windows.Forms.ToolStripButton();
@@ -65,9 +63,8 @@
 			this.toolStripDropDownConductor = new System.Windows.Forms.ToolStripDropDownButton();
 			this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemChange = new System.Windows.Forms.ToolStripMenuItem();
-			this.textBoxPixelsCountSide = new System.Windows.Forms.TextBox();
-			this.labelPixelsCountFront = new System.Windows.Forms.Label();
-			this.labelPixelsCountSide = new System.Windows.Forms.Label();
+			this.textBoxLengths = new System.Windows.Forms.TextBox();
+			this.labelConductorMaterialLength = new System.Windows.Forms.Label();
 			this.tabControlField.SuspendLayout();
 			this.tabPageFront.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxFront)).BeginInit();
@@ -149,7 +146,7 @@
 			this.trackBarScale.LargeChange = 2;
 			this.trackBarScale.Location = new System.Drawing.Point(93, 615);
 			this.trackBarScale.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-			this.trackBarScale.Maximum = 4;
+			this.trackBarScale.Maximum = 3;
 			this.trackBarScale.Name = "trackBarScale";
 			this.trackBarScale.Size = new System.Drawing.Size(200, 45);
 			this.trackBarScale.TabIndex = 2;
@@ -200,7 +197,7 @@
 			// buttonCalculateResistance
 			// 
 			this.buttonCalculateResistance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCalculateResistance.Location = new System.Drawing.Point(526, 330);
+			this.buttonCalculateResistance.Location = new System.Drawing.Point(531, 437);
 			this.buttonCalculateResistance.Name = "buttonCalculateResistance";
 			this.buttonCalculateResistance.Size = new System.Drawing.Size(154, 23);
 			this.buttonCalculateResistance.TabIndex = 6;
@@ -217,14 +214,14 @@
 			this.labelMaterial.TabIndex = 8;
 			this.labelMaterial.Text = "Материал проводника";
 			// 
-			// labelСonductorLenght
+			// labelСonductorLength
 			// 
-			this.labelСonductorLenght.AutoSize = true;
-			this.labelСonductorLenght.Location = new System.Drawing.Point(6, 91);
-			this.labelСonductorLenght.Name = "labelСonductorLenght";
-			this.labelСonductorLenght.Size = new System.Drawing.Size(117, 13);
-			this.labelСonductorLenght.TabIndex = 9;
-			this.labelСonductorLenght.Text = "Длина проводника, м";
+			this.labelСonductorLength.AutoSize = true;
+			this.labelСonductorLength.Location = new System.Drawing.Point(6, 91);
+			this.labelСonductorLength.Name = "labelСonductorLength";
+			this.labelСonductorLength.Size = new System.Drawing.Size(117, 13);
+			this.labelСonductorLength.TabIndex = 9;
+			this.labelСonductorLength.Text = "Длина проводника, м";
 			// 
 			// comboBoxConductorMaterial
 			// 
@@ -243,17 +240,6 @@
 			this.labelResistivity.Size = new System.Drawing.Size(150, 13);
 			this.labelResistivity.TabIndex = 11;
 			this.labelResistivity.Text = "Удельное R = 0 Ом*мм^2/м";
-			// 
-			// textBoxPixelsCountFront
-			// 
-			this.textBoxPixelsCountFront.AcceptsReturn = true;
-			this.textBoxPixelsCountFront.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxPixelsCountFront.Location = new System.Drawing.Point(532, 408);
-			this.textBoxPixelsCountFront.Multiline = true;
-			this.textBoxPixelsCountFront.Name = "textBoxPixelsCountFront";
-			this.textBoxPixelsCountFront.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxPixelsCountFront.Size = new System.Drawing.Size(111, 77);
-			this.textBoxPixelsCountFront.TabIndex = 13;
 			// 
 			// numericConductorLength
 			// 
@@ -281,7 +267,7 @@
 			// labelResistance
 			// 
 			this.labelResistance.AutoSize = true;
-			this.labelResistance.Location = new System.Drawing.Point(6, 244);
+			this.labelResistance.Location = new System.Drawing.Point(531, 421);
 			this.labelResistance.Name = "labelResistance";
 			this.labelResistance.Size = new System.Drawing.Size(97, 13);
 			this.labelResistance.TabIndex = 15;
@@ -301,19 +287,20 @@
 			// groupBoxConductor
 			// 
 			this.groupBoxConductor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxConductor.Controls.Add(this.textBoxLengths);
+			this.groupBoxConductor.Controls.Add(this.labelConductorMaterialLength);
 			this.groupBoxConductor.Controls.Add(this.textBoxSquares);
 			this.groupBoxConductor.Controls.Add(this.labelSquare);
 			this.groupBoxConductor.Controls.Add(this.panelColor);
 			this.groupBoxConductor.Controls.Add(this.labelMaterial);
 			this.groupBoxConductor.Controls.Add(this.comboBoxConductorMaterial);
-			this.groupBoxConductor.Controls.Add(this.labelResistance);
 			this.groupBoxConductor.Controls.Add(this.labelResistivity);
 			this.groupBoxConductor.Controls.Add(this.numericConductorLength);
-			this.groupBoxConductor.Controls.Add(this.labelСonductorLenght);
-			this.groupBoxConductor.Location = new System.Drawing.Point(526, 61);
+			this.groupBoxConductor.Controls.Add(this.labelСonductorLength);
+			this.groupBoxConductor.Location = new System.Drawing.Point(525, 61);
 			this.groupBoxConductor.Name = "groupBoxConductor";
 			this.groupBoxConductor.Padding = new System.Windows.Forms.Padding(3, 10, 3, 10);
-			this.groupBoxConductor.Size = new System.Drawing.Size(258, 263);
+			this.groupBoxConductor.Size = new System.Drawing.Size(246, 331);
 			this.groupBoxConductor.TabIndex = 17;
 			this.groupBoxConductor.TabStop = false;
 			this.groupBoxConductor.Text = "Характеристики проводника";
@@ -322,6 +309,7 @@
 			// 
 			this.textBoxSquares.AcceptsReturn = true;
 			this.textBoxSquares.Location = new System.Drawing.Point(6, 163);
+			this.textBoxSquares.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
 			this.textBoxSquares.Multiline = true;
 			this.textBoxSquares.Name = "textBoxSquares";
 			this.textBoxSquares.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -333,9 +321,9 @@
 			this.labelSquare.AutoSize = true;
 			this.labelSquare.Location = new System.Drawing.Point(6, 147);
 			this.labelSquare.Name = "labelSquare";
-			this.labelSquare.Size = new System.Drawing.Size(117, 13);
+			this.labelSquare.Size = new System.Drawing.Size(161, 13);
 			this.labelSquare.TabIndex = 16;
-			this.labelSquare.Text = "Площадь проводника";
+			this.labelSquare.Text = "Средняя площадь проводника";
 			// 
 			// panelColor
 			// 
@@ -364,17 +352,6 @@
 			this.labelTrackbarScaleMax.Size = new System.Drawing.Size(53, 13);
 			this.labelTrackbarScaleMax.TabIndex = 19;
 			this.labelTrackbarScaleMax.Text = "maxValue";
-			// 
-			// labelPixelsCount
-			// 
-			this.labelPixelsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelPixelsCount.AutoSize = true;
-			this.labelPixelsCount.Location = new System.Drawing.Point(529, 373);
-			this.labelPixelsCount.Name = "labelPixelsCount";
-			this.labelPixelsCount.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-			this.labelPixelsCount.Size = new System.Drawing.Size(120, 16);
-			this.labelPixelsCount.TabIndex = 20;
-			this.labelPixelsCount.Text = "Количество пикселей:";
 			// 
 			// toolStrip
 			// 
@@ -480,55 +457,42 @@
 			this.toolStripMenuItemChange.Text = "Изменить текущий";
 			this.toolStripMenuItemChange.Click += new System.EventHandler(this.toolStripMenuItemChange_Click);
 			// 
-			// textBoxPixelsCountSide
+			// textBoxLengths
 			// 
-			this.textBoxPixelsCountSide.AcceptsReturn = true;
-			this.textBoxPixelsCountSide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxPixelsCountSide.Location = new System.Drawing.Point(649, 408);
-			this.textBoxPixelsCountSide.Multiline = true;
-			this.textBoxPixelsCountSide.Name = "textBoxPixelsCountSide";
-			this.textBoxPixelsCountSide.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxPixelsCountSide.Size = new System.Drawing.Size(111, 77);
-			this.textBoxPixelsCountSide.TabIndex = 22;
+			this.textBoxLengths.AcceptsReturn = true;
+			this.textBoxLengths.Enabled = false;
+			this.textBoxLengths.Location = new System.Drawing.Point(6, 251);
+			this.textBoxLengths.Multiline = true;
+			this.textBoxLengths.Name = "textBoxLengths";
+			this.textBoxLengths.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxLengths.Size = new System.Drawing.Size(216, 64);
+			this.textBoxLengths.TabIndex = 19;
 			// 
-			// labelPixelsCountFront
+			// labelConductorMaterialLength
 			// 
-			this.labelPixelsCountFront.AutoSize = true;
-			this.labelPixelsCountFront.Location = new System.Drawing.Point(529, 389);
-			this.labelPixelsCountFront.Name = "labelPixelsCountFront";
-			this.labelPixelsCountFront.Size = new System.Drawing.Size(51, 13);
-			this.labelPixelsCountFront.TabIndex = 23;
-			this.labelPixelsCountFront.Text = "Поперёк";
-			// 
-			// labelPixelsCountSide
-			// 
-			this.labelPixelsCountSide.AutoSize = true;
-			this.labelPixelsCountSide.Location = new System.Drawing.Point(646, 389);
-			this.labelPixelsCountSide.Name = "labelPixelsCountSide";
-			this.labelPixelsCountSide.Size = new System.Drawing.Size(38, 13);
-			this.labelPixelsCountSide.TabIndex = 24;
-			this.labelPixelsCountSide.Text = "Вдоль";
+			this.labelConductorMaterialLength.AutoSize = true;
+			this.labelConductorMaterialLength.Location = new System.Drawing.Point(6, 235);
+			this.labelConductorMaterialLength.Name = "labelConductorMaterialLength";
+			this.labelConductorMaterialLength.Size = new System.Drawing.Size(103, 13);
+			this.labelConductorMaterialLength.TabIndex = 18;
+			this.labelConductorMaterialLength.Text = "Длина проводника";
 			// 
 			// WindowMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(784, 676);
-			this.Controls.Add(this.labelPixelsCountSide);
-			this.Controls.Add(this.labelPixelsCountFront);
-			this.Controls.Add(this.textBoxPixelsCountSide);
 			this.Controls.Add(this.toolStrip);
 			this.Controls.Add(this.pictureBoxScale);
-			this.Controls.Add(this.labelPixelsCount);
 			this.Controls.Add(this.labelTrackbarScaleMax);
 			this.Controls.Add(this.labelTrackbarScaleMin);
 			this.Controls.Add(this.groupBoxConductor);
 			this.Controls.Add(this.buttonClearField);
-			this.Controls.Add(this.textBoxPixelsCountFront);
-			this.Controls.Add(this.buttonCalculateResistance);
 			this.Controls.Add(this.labelScaleMax);
+			this.Controls.Add(this.labelResistance);
 			this.Controls.Add(this.labelScaleMin);
 			this.Controls.Add(this.labelScale);
+			this.Controls.Add(this.buttonCalculateResistance);
 			this.Controls.Add(this.trackBarScale);
 			this.Controls.Add(this.tabControlField);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -571,9 +535,8 @@
 		private System.Windows.Forms.Label labelScaleMax;
 		private System.Windows.Forms.Button buttonCalculateResistance;
 		private System.Windows.Forms.Label labelMaterial;
-		private System.Windows.Forms.Label labelСonductorLenght;
+		private System.Windows.Forms.Label labelСonductorLength;
 		private System.Windows.Forms.Label labelResistivity;
-		private System.Windows.Forms.TextBox textBoxPixelsCountFront;
 		private System.Windows.Forms.NumericUpDown numericConductorLength;
 		private System.Windows.Forms.Label labelResistance;
 		private System.Windows.Forms.Button buttonClearField;
@@ -583,7 +546,6 @@
 		private System.Windows.Forms.Label labelSquare;
 		private System.Windows.Forms.Label labelTrackbarScaleMin;
 		private System.Windows.Forms.Label labelTrackbarScaleMax;
-		private System.Windows.Forms.Label labelPixelsCount;
 		private System.Windows.Forms.ToolStrip toolStrip;
 		private System.Windows.Forms.ToolStripButton toolStripButtonPencil;
 		private System.Windows.Forms.ToolStripButton toolStripButtonLine;
@@ -596,10 +558,9 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		public System.Windows.Forms.ComboBox comboBoxConductorMaterial;
 		public System.Windows.Forms.TrackBar trackBarScale;
-		private System.Windows.Forms.TextBox textBoxPixelsCountSide;
-		private System.Windows.Forms.Label labelPixelsCountFront;
-		private System.Windows.Forms.Label labelPixelsCountSide;
 		public System.Windows.Forms.TabControl tabControlField;
+		private System.Windows.Forms.TextBox textBoxLengths;
+		private System.Windows.Forms.Label labelConductorMaterialLength;
 	}
 }
 

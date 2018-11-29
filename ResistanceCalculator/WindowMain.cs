@@ -60,8 +60,8 @@ namespace ResistanceCalculator
 			pictureSide.CellSquare = pictureFront.CellSquare;
 			pictureFront.CellRowCount = Convert.ToInt32(pictureBoxFront.Width / pictureBoxScale.Width);
 			pictureSide.CellRowCount = pictureFront.CellRowCount;
-			pictureFront.PixelInCellCount = Convert.ToInt32(Math.Pow(pictureBoxFront.Width / pictureFront.CellRowCount, 2));
-			pictureSide.PixelInCellCount = pictureFront.PixelInCellCount;
+			pictureFront.PixelsInCellCount = Convert.ToInt32(Math.Pow(pictureBoxFront.Width / pictureFront.CellRowCount, 2));
+			pictureSide.PixelsInCellCount = pictureFront.PixelsInCellCount;
 
 			PrintScales();
 
@@ -81,12 +81,15 @@ namespace ResistanceCalculator
 		private void pictureBoxFront_MouseDown(object sender, MouseEventArgs e)
 		{
 			pictureFront.Action_MouseDown(e);
+			PictureBoxPainting.maxHeight = -1;
+			PictureBoxPainting.minHeight = pictureFront.pictureBox.Height + 1;
 		}
 
 		private void pictureBoxSide_MouseDown(object sender, MouseEventArgs e)
 		{
 			pictureSide.Action_MouseDown(e);
 			numericConductorLength.Enabled = false;
+			textBoxLengths.Enabled = true;
 		}
 
 		private void pictureBoxFront_MouseMove(object sender, MouseEventArgs e)
@@ -101,7 +104,9 @@ namespace ResistanceCalculator
 
 		private void pictureBoxFront_MouseUp(object sender, MouseEventArgs e)
 		{
-			pictureFront.Action_MouseUp(e); 
+			pictureFront.Action_MouseUp(e);
+			pictureFront.CalculateHeights();
+			pictureSide.PaintHelpLines();
 		}
 
 		private void pictureBoxSide_MouseUp(object sender, MouseEventArgs e)
@@ -119,20 +124,16 @@ namespace ResistanceCalculator
 			else if (tabControlField.SelectedIndex == 1)
 			{
 				pictureSide.PaintStencil();
+				pictureSide.PaintHelpLines();
 				numericConductorLength.Enabled = true;
+				textBoxLengths.Enabled = false;
 			}
-
 			trackBarScale.Enabled = true;
 		}
 
 		private void buttonCalculateResistance_Click(object sender, EventArgs e)
 		{
 			CalculateResistance();
-			if (tabControlField.SelectedIndex == 0)
-			{
-				pictureSide.PaintHelpLines();
-			}
-			
 		}
 
 		private void WindowMain_KeyDown(object sender, KeyEventArgs e)
@@ -205,44 +206,115 @@ namespace ResistanceCalculator
 
 		private void CalculateResistance()
 		{
-			textBoxPixelsCountFront.Text = "";
-			textBoxPixelsCountSide.Text = "";
 			textBoxSquares.Text = "";
+			textBoxLengths.Text = "";
 
 			double resistance = 0;
+			double squareFront = pictureFront.CalculateSquare(); //суммарная площадь на изображении поперёк 
+			int pixelsFrontSum = 0;
 			foreach (var material in materials)
 			{
-				double squareFront = pictureFront.CalculateSquare(material);
-				pictureFront.PrintPixelCount(material, textBoxPixelsCountFront);
+				//material.PixelCount = pictureFront.CalculatePixelCount(material);
+				int pixelsFront = pictureFront.CalculatePixelCount(material);
+				pixelsFrontSum += pixelsFront;
 				material.PixelCount = 0;
 
-				pictureSide.CalculatePixelCount(material);
-				pictureSide.PrintPixelCount(material, textBoxPixelsCountSide);
-				material.PixelCount = 0;
+				//material.PixelCount = ;
+				int pixelsSide = pictureSide.CalculatePixelCount(material);
+				//pictureSide.PrintPixelCount(material, textBoxPixelsCountSide);
+				//material.PixelCount = 0;
 
+				double square = 0;
 				double length = 0;
-				double newSquare = 0;
-				if (squareFront > 0)
+				if (pixelsFrontSum != 0)
 				{
 					if (numericConductorLength.Enabled)
 					{
-						length = (double)numericConductorLength.Value;
-						newSquare = squareFront;
+						length = (double)numericConductorLength.Value * 1000; //мм
+						square = pictureFront.CalculateSquare(material);
+						//pictureFront.PrintPixelCount(material, textBoxPixelsCountFront);
 					}
-					else
+					else if (pixelsSide != 0)
 					{
 						length = pictureSide.CalculateLength(material);
-						numericConductorLength.Value = Decimal.Round(Convert.ToDecimal(length / 1000),3);
-						newSquare = pictureSide.ChangeSquare(material, squareFront);
+						square = pictureSide.ChangeSideSquare(material, squareFront);
+						//pictureSide.PrintPixelCount(material, textBoxPixelsCountSide);
+						PrintLength(material, length);
 					}
 
-					resistance += (material.Resistivity * length) / newSquare;
-				}
+					if (square > 0 && length > 0)
+					{
+						resistance += (material.Resistivity * (length/1000)) / square;
+					}
 
-				pictureFront.PrintSquare(material, textBoxSquares, newSquare);
+					PrintSquare(material, square);
+				}
+			}
+			PrintResistance(resistance);
+		}
+
+		private void PrintLength(ConductorMaterial material, double length)
+		{
+			if (length <= 0)
+			{
+				return;
 			}
 
-			PrintResistance(resistance);
+			string measurementUnit = "мм";
+			Int64 measurementCoefficient = 1;
+			string stringFormat = "n3";
+
+			const int mInLength = 1000; //мм^2
+			const int cmInLength = 10; //мм^2
+
+			if (length >= mInLength)
+			{
+				measurementUnit = "м";
+				measurementCoefficient = mInLength;
+				stringFormat = "n3";
+			}
+			else if (length >= cmInLength)
+			{
+				measurementUnit = "см";
+				measurementCoefficient = cmInLength;
+				stringFormat = "n3";
+			}
+			textBoxLengths.Text += material.Name + ": "
+				+ (length / measurementCoefficient).ToString(stringFormat)
+				+ " " + measurementUnit
+				+ Environment.NewLine;
+		}
+
+		private void PrintSquare(ConductorMaterial material, double square)
+		{
+			if (square <= 0)
+			{
+				return;
+			}
+
+			string measurementUnit = "мм^2";
+			Int64 measurementCoefficient = 1;
+			string stringFormat = "n2";
+
+			const int mInSquare = 1000000; //мм^2
+			const int cmInSquare = 100; //мм^2
+
+			if (square >= mInSquare)
+			{
+				measurementUnit = "м^2";
+				measurementCoefficient = mInSquare;
+				stringFormat = "n3";
+			}
+			else if (square >= cmInSquare)
+			{
+				measurementUnit = "см^2";
+				measurementCoefficient = cmInSquare;
+				stringFormat = "n3";
+			}
+			textBoxSquares.Text += material.Name + ": "
+				+ (square / measurementCoefficient).ToString(stringFormat)
+				+ " " + measurementUnit
+				+ Environment.NewLine;
 		}
 
 		private void PrintResistance(double resistance)

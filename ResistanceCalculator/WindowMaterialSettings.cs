@@ -43,8 +43,7 @@ namespace ResistanceCalculator
 		{
 			bool result = true;
 
-			if (panelColor.BackColor == Color.Transparent)
-				result = false;
+			result = PictureBoxPainting.IsAvailableColor(color);
 
 			foreach(var material in windowMain.materials)
 			{

@@ -11,7 +11,7 @@ namespace ResistanceCalculator
 	{
 		WindowMain windowMain; //чтобы получать доступ к публичным объектам на форме
 
-		PictureBox pictureBox;
+		public PictureBox pictureBox;
 		Bitmap bitmapReal;
 		Graphics graphicsReal;
 		Bitmap bitmapBuf;
@@ -20,7 +20,7 @@ namespace ResistanceCalculator
 		//BAD: публичные переменные - очень плохо. Придумать другое решение
 		public UInt32 CellSquare { get; set; } //мм^2
 		public int CellRowCount { get; set; }
-		public int PixelInCellCount { get; set; }
+		public int PixelsInCellCount { get; set; }
 
 		public Pen PenCurrent { get; set; }
 
@@ -144,7 +144,7 @@ namespace ResistanceCalculator
 			int penStencilWidth = 1;
 			Pen penStencil = new Pen(penStencilColor, penStencilWidth);
 
-			int pixelInCellRowCount = Convert.ToInt32(Math.Sqrt(PixelInCellCount));
+			int pixelInCellRowCount = Convert.ToInt32(Math.Sqrt(PixelsInCellCount));
 
 			int currentX = -1;
 			while (currentX <= pictureBox.Width)
@@ -220,7 +220,6 @@ namespace ResistanceCalculator
 			if (e.Button == MouseButtons.Left)
 			{
 				this.Visualize();
-				windowMain.trackBarScale.Enabled = false;
 			}
 		}
 
@@ -233,8 +232,9 @@ namespace ResistanceCalculator
 			}
 		}
 
-		public void CalculatePixelCount(ConductorMaterial material)
+		public int CalculatePixelCount(ConductorMaterial material)
 		{
+			int pixelsCount = 0;
 			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
 			{
 				for (int jHeight = 0; jHeight < bitmapReal.Height; jHeight++)
@@ -245,20 +245,30 @@ namespace ResistanceCalculator
 						//TODO: Разобраться с предикатами и заменить это на materials.Find()
 						if (material.PixelColor.ToArgb() == currentPixel.ToArgb())
 						{
-							material.PixelCount++;
-
-							if (windowMain.tabControlField.SelectedIndex == 0)
-							{
-								if (jHeight < minHeight)
-									minHeight = jHeight;
-								if (jHeight > maxHeight)
-									maxHeight = jHeight;
-							}
+							pixelsCount++;
 						}
 					}
 				}
 			}
+			return pixelsCount;
+		}
 
+		public void CalculateHeights()
+		{
+			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
+			{
+				for (int jHeight = 0; jHeight < bitmapReal.Height; jHeight++)
+				{
+					Color currentPixel = bitmapReal.GetPixel(iWidth, jHeight);
+					if (IsAvailableColor(currentPixel))
+					{
+						if (jHeight < minHeight)
+							minHeight = jHeight;
+						if (jHeight > maxHeight)
+							maxHeight = jHeight;
+					}
+				}
+			}
 		}
 
 		public void PrintPixelCount(ConductorMaterial material, TextBox textBoxToPrint)
@@ -271,47 +281,54 @@ namespace ResistanceCalculator
 			textBoxToPrint.Text += material.Name + ": " + material.PixelCount.ToString() + Environment.NewLine;
 		}
 
+		public double CalculateSquare()
+		{
+			double square = 0;
+			foreach(var material in windowMain.materials)
+			{
+				square += CalculateSquare(material);
+			}
+			return square;
+		}
+
 		public double CalculateSquare(ConductorMaterial currentMaterial)
 		{
-			CalculatePixelCount(currentMaterial);
-			double square = (currentMaterial.PixelCount / ((double)PixelInCellCount / (double)CellSquare)); //Количество пикселей/количество пикселей в 1 мм^2
+			currentMaterial.PixelCount = CalculatePixelCount(currentMaterial);
+			double square = (currentMaterial.PixelCount / ((double)PixelsInCellCount / (double)CellSquare)); //Количество пикселей/количество пикселей в 1 мм^2
 			return square;
 		}
 
 		public double CalculateLength(ConductorMaterial material)
 		{
-			double maxPixelsInLine = 0;
-			for (int iHeight = 0; iHeight < bitmapReal.Height; iHeight++)
+			double pixelsInLineCount = 0;
+			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
 			{
-				double pixelsCountInLine = 0;
-				for (int jWidth = 0; jWidth < bitmapReal.Width; jWidth++)
+				for (int jHeight = 0; jHeight < bitmapReal.Height; jHeight++)
 				{
-					Color currentPixel = bitmapReal.GetPixel(jWidth, iHeight);
+					Color currentPixel = bitmapReal.GetPixel(iWidth, jHeight);
 					if (IsAvailableColor(currentPixel))
 					{
 						//TODO: Разобраться с предикатами и заменить это на materials.Find()
 						if (material.PixelColor.ToArgb() == currentPixel.ToArgb())
 						{
-							pixelsCountInLine++;
+							pixelsInLineCount++;
+							break;
 						}
 					}
 				}
-				if (pixelsCountInLine > maxPixelsInLine)
-				{
-					maxPixelsInLine = pixelsCountInLine;
-				}
 			}
 
-			double length = maxPixelsInLine / (Math.Sqrt(PixelInCellCount) / Math.Sqrt(CellSquare));
+			double length = pixelsInLineCount / (Math.Sqrt(PixelsInCellCount) / Math.Sqrt(CellSquare));
 			return length;
 		}
 
-		public double ChangeSquare(ConductorMaterial material, double square)
+		public double ChangeSideSquare(ConductorMaterial material, double frontSquare)
 		{
 			double newSquare = 0;
-			int lineDifference = maxHeight - minHeight;
-			int lineCount = 0;
+			int frontLineDifference = maxHeight - minHeight;
+			double lineWidth = Math.Sqrt(PixelsInCellCount) / Math.Sqrt(CellSquare);
 
+			int lineCount = 0;
 			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
 			{
 				int currentLineDiff = 0;
@@ -330,51 +347,20 @@ namespace ResistanceCalculator
 				if (currentLineDiff != 0)
 				{
 					lineCount++;
-					double ot = (double)currentLineDiff / lineDifference;
-					double currentSquare = square * ot;
+					double ratio = (double)currentLineDiff / frontLineDifference;
+					double currentSquare = frontSquare * ratio;
 					newSquare += currentSquare;
 				}
-				
+
 			}
-			newSquare = newSquare / (PixelInCellCount / CellSquare);
+			newSquare = newSquare / lineCount;
 			return newSquare;
 		}
 
-		public void PrintSquare(ConductorMaterial material, TextBox textBoxToPrint, double square)
+		public static bool IsAvailableColor(Color pixelColor)
 		{
-			if (square <= 0)
-			{
-				return;
-			}
-
-			string measurementUnit = "мм^2";
-			Int64 measurementCoefficient = 1;
-			string stringFormat = "n2";
-
-			const int mInSquare = 1000000; //мм^2
-			const int cmInSquare = 100; //мм^2
-
-			if (square > mInSquare)
-			{
-				measurementUnit = "м^2";
-				measurementCoefficient = mInSquare;
-				stringFormat = "n3";
-			}
-			else if (square > cmInSquare)
-			{
-				measurementUnit = "см^2";
-				measurementCoefficient = cmInSquare;
-				stringFormat = "n3";
-			}
-			textBoxToPrint.Text += material.Name + ": "
-				+ (square / measurementCoefficient).ToString(stringFormat)
-				+ " " + measurementUnit
-				+ Environment.NewLine;
-		}
-
-		private bool IsAvailableColor(Color pixelColor)
-		{
-			return pixelColor.ToArgb() != 0;
+			return pixelColor.ToArgb() != 0 &&
+				pixelColor.ToArgb() != Color.White.ToArgb();
 		}
 
 		private Rectangle CreateRectangle(Point previous, Point current)
