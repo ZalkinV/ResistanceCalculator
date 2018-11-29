@@ -27,6 +27,11 @@ namespace ResistanceCalculator
 		public Point MousePreviousPosition { get; set; }
 		public Point MouseCurrentPosition { get; set; }
 
+		public static int maxHeight;
+		public static int minHeight;
+
+		public static int conductorWidth;
+
 		public PictureBoxPainting(WindowMain windowMain, PictureBox pictureBox)
 		{
 			this.windowMain = windowMain;
@@ -38,6 +43,9 @@ namespace ResistanceCalculator
 			this.graphicsBuf = Graphics.FromImage(bitmapBuf);
 
 			this.PenCurrent = new Pen(Color.Black, 5);
+
+			maxHeight = -1;
+			minHeight = pictureBox.Height + 1;
 		}
 
 		//public void PaintOnPicture(Graphics graphicsVisible, ToolStripButton toolStripButtonCurrent)
@@ -124,7 +132,7 @@ namespace ResistanceCalculator
 			pictureBox.Invalidate();
 		}
 
-		public void PaintStencil()
+		public Bitmap PaintStencil()
 		{
 			Bitmap bitmapStencil = new Bitmap(pictureBox.Width, pictureBox.Height);
 			Graphics graphicsStencil = Graphics.FromImage(bitmapStencil);
@@ -154,9 +162,29 @@ namespace ResistanceCalculator
 				graphicsStencil.DrawLine(penStencil, 0, currentY, pictureBox.Width, currentY);
 				currentY += pixelInCellRowCount - 1;
 			}
+
 			pictureBox.Image = (Bitmap)bitmapStencil.Clone();
 
+			graphicsStencil.Dispose();
 			penStencil.Dispose();
+
+			return bitmapStencil;
+		}
+
+		public void PaintHelpLines()
+		{
+			Bitmap bitmapStencil = PaintStencil();
+			Graphics graphicsStencil = Graphics.FromImage(bitmapStencil);
+			Pen penLines = new Pen(Color.Red, 1);
+			graphicsStencil.DrawLine(penLines, 0, minHeight, pictureBox.Width, minHeight);
+			graphicsStencil.DrawLine(penLines, 0, maxHeight, pictureBox.Width, maxHeight);
+
+			graphicsStencil.DrawImage(bitmapReal, 0, 0);
+			pictureBox.Image = (Bitmap)bitmapStencil.Clone();
+
+			bitmapStencil.Dispose();
+			graphicsStencil.Dispose();
+			penLines.Dispose();
 		}
 
 		public void Action_MouseDown(MouseEventArgs e)
@@ -205,7 +233,7 @@ namespace ResistanceCalculator
 			}
 		}
 
-		public void CalculatePixelCount()
+		public void CalculatePixelCount(ConductorMaterial material)
 		{
 			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
 			{
@@ -215,19 +243,133 @@ namespace ResistanceCalculator
 					if (IsAvailableColor(currentPixel))
 					{
 						//TODO: Разобраться с предикатами и заменить это на materials.Find()
-						foreach (var material in windowMain.materials)
+						if (material.PixelColor.ToArgb() == currentPixel.ToArgb())
 						{
-							if (material.PixelColor.ToArgb() == currentPixel.ToArgb())
-								material.PixelCount++;
+							material.PixelCount++;
+
+							if (windowMain.tabControlField.SelectedIndex == 0)
+							{
+								if (jHeight < minHeight)
+									minHeight = jHeight;
+								if (jHeight > maxHeight)
+									maxHeight = jHeight;
+							}
 						}
 					}
 				}
 			}
+
 		}
 
-		public UInt32 CalculateSquare()
+		public void PrintPixelCount(ConductorMaterial material, TextBox textBoxToPrint)
 		{
-			return 1;
+			if (material.PixelCount <= 0)
+			{
+				return;
+			}
+
+			textBoxToPrint.Text += material.Name + ": " + material.PixelCount.ToString() + Environment.NewLine;
+		}
+
+		public double CalculateSquare(ConductorMaterial currentMaterial)
+		{
+			CalculatePixelCount(currentMaterial);
+			double square = (currentMaterial.PixelCount / ((double)PixelInCellCount / (double)CellSquare)); //Количество пикселей/количество пикселей в 1 мм^2
+			return square;
+		}
+
+		public double CalculateLength(ConductorMaterial material)
+		{
+			double maxPixelsInLine = 0;
+			for (int iHeight = 0; iHeight < bitmapReal.Height; iHeight++)
+			{
+				double pixelsCountInLine = 0;
+				for (int jWidth = 0; jWidth < bitmapReal.Width; jWidth++)
+				{
+					Color currentPixel = bitmapReal.GetPixel(jWidth, iHeight);
+					if (IsAvailableColor(currentPixel))
+					{
+						//TODO: Разобраться с предикатами и заменить это на materials.Find()
+						if (material.PixelColor.ToArgb() == currentPixel.ToArgb())
+						{
+							pixelsCountInLine++;
+						}
+					}
+				}
+				if (pixelsCountInLine > maxPixelsInLine)
+				{
+					maxPixelsInLine = pixelsCountInLine;
+				}
+			}
+
+			double length = maxPixelsInLine / (Math.Sqrt(PixelInCellCount) / Math.Sqrt(CellSquare));
+			return length;
+		}
+
+		public double ChangeSquare(ConductorMaterial material, double square)
+		{
+			double newSquare = 0;
+			int lineDifference = maxHeight - minHeight;
+			int lineCount = 0;
+
+			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
+			{
+				int currentLineDiff = 0;
+				for (int jHeight = 0; jHeight < bitmapReal.Height; jHeight++)
+				{
+					Color currentPixel = bitmapReal.GetPixel(iWidth, jHeight);
+					if (IsAvailableColor(currentPixel))
+					{
+						//TODO: Разобраться с предикатами и заменить это на materials.Find()
+						if (material.PixelColor.ToArgb() == currentPixel.ToArgb())
+						{
+							currentLineDiff++;
+						}
+					}
+				}
+				if (currentLineDiff != 0)
+				{
+					lineCount++;
+					double ot = (double)currentLineDiff / lineDifference;
+					double currentSquare = square * ot;
+					newSquare += currentSquare;
+				}
+				
+			}
+			newSquare = newSquare / (PixelInCellCount / CellSquare);
+			return newSquare;
+		}
+
+		public void PrintSquare(ConductorMaterial material, TextBox textBoxToPrint, double square)
+		{
+			if (square <= 0)
+			{
+				return;
+			}
+
+			string measurementUnit = "мм^2";
+			Int64 measurementCoefficient = 1;
+			string stringFormat = "n2";
+
+			const int mInSquare = 1000000; //мм^2
+			const int cmInSquare = 100; //мм^2
+
+			if (square > mInSquare)
+			{
+				measurementUnit = "м^2";
+				measurementCoefficient = mInSquare;
+				stringFormat = "n3";
+			}
+			else if (square > cmInSquare)
+			{
+				measurementUnit = "см^2";
+				measurementCoefficient = cmInSquare;
+				stringFormat = "n3";
+			}
+			textBoxToPrint.Text += material.Name + ": "
+				+ (square / measurementCoefficient).ToString(stringFormat)
+				+ " " + measurementUnit
+				+ Environment.NewLine;
 		}
 
 		private bool IsAvailableColor(Color pixelColor)

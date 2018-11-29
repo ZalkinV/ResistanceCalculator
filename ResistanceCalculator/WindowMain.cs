@@ -86,6 +86,7 @@ namespace ResistanceCalculator
 		private void pictureBoxSide_MouseDown(object sender, MouseEventArgs e)
 		{
 			pictureSide.Action_MouseDown(e);
+			numericConductorLength.Enabled = false;
 		}
 
 		private void pictureBoxFront_MouseMove(object sender, MouseEventArgs e)
@@ -118,6 +119,7 @@ namespace ResistanceCalculator
 			else if (tabControlField.SelectedIndex == 1)
 			{
 				pictureSide.PaintStencil();
+				numericConductorLength.Enabled = true;
 			}
 
 			trackBarScale.Enabled = true;
@@ -126,6 +128,11 @@ namespace ResistanceCalculator
 		private void buttonCalculateResistance_Click(object sender, EventArgs e)
 		{
 			CalculateResistance();
+			if (tabControlField.SelectedIndex == 0)
+			{
+				pictureSide.PaintHelpLines();
+			}
+			
 		}
 
 		private void WindowMain_KeyDown(object sender, KeyEventArgs e)
@@ -198,30 +205,44 @@ namespace ResistanceCalculator
 
 		private void CalculateResistance()
 		{
-			pictureFront.CalculatePixelCount();
-			//pictureSide.CalculatePixelCount();
-			//pictureSide.CalculateSquare();
-
-			textBoxPixelsCount.Text = "";
+			textBoxPixelsCountFront.Text = "";
+			textBoxPixelsCountSide.Text = "";
 			textBoxSquares.Text = "";
 
 			double resistance = 0;
 			foreach (var material in materials)
 			{
-				double square = (material.PixelCount / ((double)pictureFront.PixelInCellCount / (double)pictureFront.CellSquare)); //Количество пикселей/количество пикселей в 1 мм^2
-				if (square > 0)
-					resistance += (material.Resistivity * (double)numericConductorLength.Value) / square;
+				double squareFront = pictureFront.CalculateSquare(material);
+				pictureFront.PrintPixelCount(material, textBoxPixelsCountFront);
+				material.PixelCount = 0;
 
-				material.PrintSquare(textBoxSquares, square);
-				material.PrintPixelCount(textBoxPixelsCount);
+				pictureSide.CalculatePixelCount(material);
+				pictureSide.PrintPixelCount(material, textBoxPixelsCountSide);
+				material.PixelCount = 0;
+
+				double length = 0;
+				double newSquare = 0;
+				if (squareFront > 0)
+				{
+					if (numericConductorLength.Enabled)
+					{
+						length = (double)numericConductorLength.Value;
+						newSquare = squareFront;
+					}
+					else
+					{
+						length = pictureSide.CalculateLength(material);
+						numericConductorLength.Value = Decimal.Round(Convert.ToDecimal(length / 1000),3);
+						newSquare = pictureSide.ChangeSquare(material, squareFront);
+					}
+
+					resistance += (material.Resistivity * length) / newSquare;
+				}
+
+				pictureFront.PrintSquare(material, textBoxSquares, newSquare);
 			}
 
 			PrintResistance(resistance);
-
-			foreach (var material in materials)
-			{
-				material.PixelCount = 0;
-			}
 		}
 
 		private void PrintResistance(double resistance)

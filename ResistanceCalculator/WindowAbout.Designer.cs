@@ -113,7 +113,7 @@
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanelHelp.Size = new System.Drawing.Size(496, 491);
+			this.tableLayoutPanelHelp.Size = new System.Drawing.Size(496, 478);
 			this.tableLayoutPanelHelp.TabIndex = 4;
 			// 
 			// labelAddInfo
@@ -124,10 +124,9 @@
 			this.labelAddInfo.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
 			this.labelAddInfo.MaximumSize = new System.Drawing.Size(400, 0);
 			this.labelAddInfo.Name = "labelAddInfo";
-			this.labelAddInfo.Size = new System.Drawing.Size(251, 52);
+			this.labelAddInfo.Size = new System.Drawing.Size(183, 39);
 			this.labelAddInfo.TabIndex = 5;
-			this.labelAddInfo.Text = "Автор: Залкин Виктор Михайлович\r\nГруппа: M3206\r\nE-mail: zalkin.viktor@mail.ru\r\nПр" +
-    "еподаватель: Зинчик Александр Адольфович";
+			this.labelAddInfo.Text = "Автор: Залкин Виктор Михайлович\r\nГруппа: M3206\r\nE-mail: zalkin.viktor@mail.ru";
 			// 
 			// labelHowUse
 			// 
@@ -146,7 +145,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(520, 511);
+			this.ClientSize = new System.Drawing.Size(520, 496);
 			this.Controls.Add(this.tableLayoutPanelHelp);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
