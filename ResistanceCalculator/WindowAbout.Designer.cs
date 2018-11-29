@@ -58,7 +58,7 @@
 			this.labelHowUseTitle.AutoSize = true;
 			this.labelHowUseTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelHowUseTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelHowUseTitle.Location = new System.Drawing.Point(3, 51);
+			this.labelHowUseTitle.Location = new System.Drawing.Point(3, 77);
 			this.labelHowUseTitle.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
 			this.labelHowUseTitle.Name = "labelHowUseTitle";
 			this.labelHowUseTitle.Size = new System.Drawing.Size(157, 18);
@@ -71,7 +71,7 @@
 			this.labelAddInfoTitle.AutoSize = true;
 			this.labelAddInfoTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelAddInfoTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelAddInfoTitle.Location = new System.Drawing.Point(3, 193);
+			this.labelAddInfoTitle.Location = new System.Drawing.Point(3, 362);
 			this.labelAddInfoTitle.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
 			this.labelAddInfoTitle.Name = "labelAddInfoTitle";
 			this.labelAddInfoTitle.Size = new System.Drawing.Size(250, 18);
@@ -86,9 +86,11 @@
 			this.labelDescription.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
 			this.labelDescription.MaximumSize = new System.Drawing.Size(400, 0);
 			this.labelDescription.Name = "labelDescription";
-			this.labelDescription.Size = new System.Drawing.Size(100, 13);
+			this.labelDescription.Size = new System.Drawing.Size(399, 39);
 			this.labelDescription.TabIndex = 3;
-			this.labelDescription.Text = "Проект по физике";
+			this.labelDescription.Text = "Это программа является проектом по физике и позволяет рассчитать сопротивление пр" +
+    "оводника, с поперечным сечением, которое вы нарисуете и параметрами, параметрами" +
+    ", которые вы зададите. ";
 			// 
 			// tableLayoutPanelHelp
 			// 
@@ -111,14 +113,14 @@
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanelHelp.Size = new System.Drawing.Size(405, 283);
+			this.tableLayoutPanelHelp.Size = new System.Drawing.Size(484, 452);
 			this.tableLayoutPanelHelp.TabIndex = 4;
 			// 
 			// labelAddInfo
 			// 
 			this.labelAddInfo.AutoSize = true;
 			this.labelAddInfo.Dock = System.Windows.Forms.DockStyle.Left;
-			this.labelAddInfo.Location = new System.Drawing.Point(3, 216);
+			this.labelAddInfo.Location = new System.Drawing.Point(3, 385);
 			this.labelAddInfo.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
 			this.labelAddInfo.MaximumSize = new System.Drawing.Size(400, 0);
 			this.labelAddInfo.Name = "labelAddInfo";
@@ -131,11 +133,11 @@
 			// 
 			this.labelHowUse.AutoSize = true;
 			this.labelHowUse.Dock = System.Windows.Forms.DockStyle.Left;
-			this.labelHowUse.Location = new System.Drawing.Point(3, 74);
+			this.labelHowUse.Location = new System.Drawing.Point(3, 100);
 			this.labelHowUse.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
-			this.labelHowUse.MaximumSize = new System.Drawing.Size(400, 0);
+			this.labelHowUse.MaximumSize = new System.Drawing.Size(480, 0);
 			this.labelHowUse.Name = "labelHowUse";
-			this.labelHowUse.Size = new System.Drawing.Size(399, 104);
+			this.labelHowUse.Size = new System.Drawing.Size(478, 247);
 			this.labelHowUse.TabIndex = 4;
 			this.labelHowUse.Text = resources.GetString("labelHowUse.Text");
 			// 
@@ -144,13 +146,15 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(442, 378);
+			this.ClientSize = new System.Drawing.Size(520, 475);
 			this.Controls.Add(this.tableLayoutPanelHelp);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "WindowAbout";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Справка";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WindowAbout_FormClosed);
 			this.tableLayoutPanelHelp.ResumeLayout(false);
 			this.tableLayoutPanelHelp.PerformLayout();
 			this.ResumeLayout(false);

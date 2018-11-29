@@ -167,6 +167,7 @@ namespace ResistanceCalculator
 				this.MouseCurrentPosition = e.Location;
 
 				this.Visualize();
+				windowMain.trackBarScale.Enabled = false;
 			}
 			else if (e.Button == MouseButtons.Right)
 			{
@@ -191,6 +192,7 @@ namespace ResistanceCalculator
 			if (e.Button == MouseButtons.Left)
 			{
 				this.Visualize();
+				windowMain.trackBarScale.Enabled = false;
 			}
 		}
 
@@ -221,6 +223,11 @@ namespace ResistanceCalculator
 					}
 				}
 			}
+		}
+
+		public UInt32 CalculateSquare()
+		{
+			return 1;
 		}
 
 		private bool IsAvailableColor(Color pixelColor)

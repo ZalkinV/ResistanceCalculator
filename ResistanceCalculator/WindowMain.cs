@@ -56,7 +56,7 @@ namespace ResistanceCalculator
 			comboBoxConductorMaterial.DisplayMember = "Name"; //Выбираю поле для отображения у класса, из элементов которого составлен List
 			comboBoxConductorMaterial.ValueMember = "Resistivity"; //Выбираю поле для значения у класса, из элементов которого составлен List
 			
-			pictureFront.CellSquare = trackBarScale.Value == 0 ? 1 : Convert.ToUInt32(trackBarScale.Value);
+			pictureFront.CellSquare = trackBarScale.Value == 0 ? 1 : Convert.ToUInt32(Math.Pow(trackBarScale.Value,2));
 			pictureSide.CellSquare = pictureFront.CellSquare;
 			pictureFront.CellRowCount = Convert.ToInt32(pictureBoxFront.Width / pictureBoxScale.Width);
 			pictureSide.CellRowCount = pictureFront.CellRowCount;
@@ -118,6 +118,8 @@ namespace ResistanceCalculator
 			{
 				pictureSide.PaintStencil();
 			}
+
+			trackBarScale.Enabled = true;
 		}
 
 		private void buttonCalculateResistance_Click(object sender, EventArgs e)
@@ -189,6 +191,9 @@ namespace ResistanceCalculator
 		private void CalculateResistance()
 		{
 			pictureFront.CalculatePixelCount();
+			pictureFront.CalculateSquare();
+			pictureSide.CalculatePixelCount();
+			pictureSide.CalculateSquare();
 
 			textBoxPixelsCount.Text = "";
 			textBoxSquares.Text = "";
@@ -325,6 +330,12 @@ namespace ResistanceCalculator
 				windowMaterialSettings.Show();
 				isMaterialSettingsOpened = true;
 			}
+		}
+
+		private void WindowMain_Shown(object sender, EventArgs e)
+		{
+			WindowAbout windowAbout = new WindowAbout();
+			windowAbout.Show();
 		}
 	}
 }

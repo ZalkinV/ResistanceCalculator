@@ -142,7 +142,7 @@
 			this.trackBarScale.LargeChange = 2;
 			this.trackBarScale.Location = new System.Drawing.Point(93, 515);
 			this.trackBarScale.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-			this.trackBarScale.Maximum = 5;
+			this.trackBarScale.Maximum = 4;
 			this.trackBarScale.Name = "trackBarScale";
 			this.trackBarScale.Size = new System.Drawing.Size(200, 45);
 			this.trackBarScale.TabIndex = 2;
@@ -344,9 +344,9 @@
 			this.labelTrackbarMax.AutoSize = true;
 			this.labelTrackbarMax.Location = new System.Drawing.Point(266, 547);
 			this.labelTrackbarMax.Name = "labelTrackbarMax";
-			this.labelTrackbarMax.Size = new System.Drawing.Size(37, 13);
+			this.labelTrackbarMax.Size = new System.Drawing.Size(31, 13);
 			this.labelTrackbarMax.TabIndex = 19;
-			this.labelTrackbarMax.Text = "32768";
+			this.labelTrackbarMax.Text = "4096";
 			// 
 			// labelPixelCount
 			// 
@@ -490,6 +490,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Калькулятор сопротивления";
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.MainWindow_HelpButtonClicked);
+			this.Shown += new System.EventHandler(this.WindowMain_Shown);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WindowMain_KeyDown);
 			this.tabControlField.ResumeLayout(false);
 			this.tabPageFront.ResumeLayout(false);
@@ -515,7 +516,6 @@
 		private System.Windows.Forms.TabPage tabPageFront;
 		private System.Windows.Forms.PictureBox pictureBoxFront;
 		private System.Windows.Forms.PictureBox pictureBoxSide;
-		private System.Windows.Forms.TrackBar trackBarScale;
 		private System.Windows.Forms.Label labelScale;
 		private System.Windows.Forms.PictureBox pictureBoxScale;
 		private System.Windows.Forms.Label labelScaleMin;
@@ -546,6 +546,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChange;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		public System.Windows.Forms.ComboBox comboBoxConductorMaterial;
+		public System.Windows.Forms.TrackBar trackBarScale;
 	}
 }
 

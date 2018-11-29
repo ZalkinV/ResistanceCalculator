@@ -16,5 +16,10 @@ namespace ResistanceCalculator
 		{
 			InitializeComponent();
 		}
+
+		private void WindowAbout_FormClosed(object sender, FormClosedEventArgs e)
+		{
+
+		}
 	}
 }
