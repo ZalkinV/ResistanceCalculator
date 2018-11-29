@@ -71,7 +71,7 @@
 			this.labelAddInfoTitle.AutoSize = true;
 			this.labelAddInfoTitle.BackColor = System.Drawing.Color.Transparent;
 			this.labelAddInfoTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelAddInfoTitle.Location = new System.Drawing.Point(3, 440);
+			this.labelAddInfoTitle.Location = new System.Drawing.Point(3, 453);
 			this.labelAddInfoTitle.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
 			this.labelAddInfoTitle.Name = "labelAddInfoTitle";
 			this.labelAddInfoTitle.Size = new System.Drawing.Size(250, 18);
@@ -113,14 +113,14 @@
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanelHelp.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanelHelp.Size = new System.Drawing.Size(496, 517);
+			this.tableLayoutPanelHelp.Size = new System.Drawing.Size(556, 530);
 			this.tableLayoutPanelHelp.TabIndex = 4;
 			// 
 			// labelAddInfo
 			// 
 			this.labelAddInfo.AutoSize = true;
 			this.labelAddInfo.Dock = System.Windows.Forms.DockStyle.Left;
-			this.labelAddInfo.Location = new System.Drawing.Point(3, 463);
+			this.labelAddInfo.Location = new System.Drawing.Point(3, 476);
 			this.labelAddInfo.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
 			this.labelAddInfo.MaximumSize = new System.Drawing.Size(400, 0);
 			this.labelAddInfo.Name = "labelAddInfo";
@@ -134,9 +134,9 @@
 			this.labelHowUse.Dock = System.Windows.Forms.DockStyle.Left;
 			this.labelHowUse.Location = new System.Drawing.Point(3, 100);
 			this.labelHowUse.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
-			this.labelHowUse.MaximumSize = new System.Drawing.Size(490, 0);
+			this.labelHowUse.MaximumSize = new System.Drawing.Size(550, 0);
 			this.labelHowUse.Name = "labelHowUse";
-			this.labelHowUse.Size = new System.Drawing.Size(490, 325);
+			this.labelHowUse.Size = new System.Drawing.Size(550, 338);
 			this.labelHowUse.TabIndex = 4;
 			this.labelHowUse.Text = resources.GetString("labelHowUse.Text");
 			// 
@@ -145,7 +145,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(520, 536);
+			this.ClientSize = new System.Drawing.Size(576, 546);
 			this.Controls.Add(this.tableLayoutPanelHelp);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;

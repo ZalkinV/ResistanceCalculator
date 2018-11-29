@@ -321,9 +321,9 @@
 			this.labelSquare.AutoSize = true;
 			this.labelSquare.Location = new System.Drawing.Point(6, 147);
 			this.labelSquare.Name = "labelSquare";
-			this.labelSquare.Size = new System.Drawing.Size(161, 13);
+			this.labelSquare.Size = new System.Drawing.Size(117, 13);
 			this.labelSquare.TabIndex = 16;
-			this.labelSquare.Text = "Средняя площадь проводника";
+			this.labelSquare.Text = "Площадь проводника";
 			// 
 			// panelColor
 			// 

@@ -326,7 +326,6 @@ namespace ResistanceCalculator
 		{
 			double newSquare = 0;
 			int frontLineDifference = maxHeight - minHeight;
-			double lineWidth = Math.Sqrt(PixelsInCellCount) / Math.Sqrt(CellSquare);
 
 			int lineCount = 0;
 			for (int iWidth = 0; iWidth < bitmapReal.Width; iWidth++)
@@ -360,7 +359,8 @@ namespace ResistanceCalculator
 		public static bool IsAvailableColor(Color pixelColor)
 		{
 			return pixelColor.ToArgb() != 0 &&
-				pixelColor.ToArgb() != Color.White.ToArgb();
+				pixelColor.ToArgb() != Color.White.ToArgb() &&
+				pixelColor.A != 255;
 		}
 
 		private Rectangle CreateRectangle(Point previous, Point current)
