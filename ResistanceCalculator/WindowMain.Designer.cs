@@ -48,6 +48,8 @@
 			this.labelResistance = new System.Windows.Forms.Label();
 			this.buttonClearField = new System.Windows.Forms.Button();
 			this.groupBoxConductor = new System.Windows.Forms.GroupBox();
+			this.textBoxLengths = new System.Windows.Forms.TextBox();
+			this.labelConductorMaterialLength = new System.Windows.Forms.Label();
 			this.textBoxSquares = new System.Windows.Forms.TextBox();
 			this.labelSquare = new System.Windows.Forms.Label();
 			this.panelColor = new System.Windows.Forms.Panel();
@@ -63,8 +65,6 @@
 			this.toolStripDropDownConductor = new System.Windows.Forms.ToolStripDropDownButton();
 			this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemChange = new System.Windows.Forms.ToolStripMenuItem();
-			this.textBoxLengths = new System.Windows.Forms.TextBox();
-			this.labelConductorMaterialLength = new System.Windows.Forms.Label();
 			this.tabControlField.SuspendLayout();
 			this.tabPageFront.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxFront)).BeginInit();
@@ -305,6 +305,26 @@
 			this.groupBoxConductor.TabStop = false;
 			this.groupBoxConductor.Text = "Характеристики проводника";
 			// 
+			// textBoxLengths
+			// 
+			this.textBoxLengths.AcceptsReturn = true;
+			this.textBoxLengths.Enabled = false;
+			this.textBoxLengths.Location = new System.Drawing.Point(6, 251);
+			this.textBoxLengths.Multiline = true;
+			this.textBoxLengths.Name = "textBoxLengths";
+			this.textBoxLengths.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxLengths.Size = new System.Drawing.Size(216, 64);
+			this.textBoxLengths.TabIndex = 19;
+			// 
+			// labelConductorMaterialLength
+			// 
+			this.labelConductorMaterialLength.AutoSize = true;
+			this.labelConductorMaterialLength.Location = new System.Drawing.Point(6, 235);
+			this.labelConductorMaterialLength.Name = "labelConductorMaterialLength";
+			this.labelConductorMaterialLength.Size = new System.Drawing.Size(103, 13);
+			this.labelConductorMaterialLength.TabIndex = 18;
+			this.labelConductorMaterialLength.Text = "Длина проводника";
+			// 
 			// textBoxSquares
 			// 
 			this.textBoxSquares.AcceptsReturn = true;
@@ -375,7 +395,7 @@
 			this.toolStripButtonPencil.Checked = true;
 			this.toolStripButtonPencil.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toolStripButtonPencil.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButtonPencil.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonPencil.Image")));
+			this.toolStripButtonPencil.Image = global::ResistanceCalculator.Properties.Resources.Pencil;
 			this.toolStripButtonPencil.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.toolStripButtonPencil.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonPencil.Name = "toolStripButtonPencil";
@@ -386,7 +406,7 @@
 			// toolStripButtonLine
 			// 
 			this.toolStripButtonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButtonLine.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLine.Image")));
+			this.toolStripButtonLine.Image = global::ResistanceCalculator.Properties.Resources.Line;
 			this.toolStripButtonLine.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonLine.Name = "toolStripButtonLine";
@@ -397,7 +417,7 @@
 			// toolStripButtonRectangle
 			// 
 			this.toolStripButtonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButtonRectangle.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRectangle.Image")));
+			this.toolStripButtonRectangle.Image = global::ResistanceCalculator.Properties.Resources.Rectangle;
 			this.toolStripButtonRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.toolStripButtonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonRectangle.Name = "toolStripButtonRectangle";
@@ -408,7 +428,7 @@
 			// toolStripButtonEllipse
 			// 
 			this.toolStripButtonEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButtonEllipse.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEllipse.Image")));
+			this.toolStripButtonEllipse.Image = global::ResistanceCalculator.Properties.Resources.Ellipse;
 			this.toolStripButtonEllipse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.toolStripButtonEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonEllipse.Name = "toolStripButtonEllipse";
@@ -419,7 +439,7 @@
 			// toolStripButtonEraser
 			// 
 			this.toolStripButtonEraser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButtonEraser.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEraser.Image")));
+			this.toolStripButtonEraser.Image = global::ResistanceCalculator.Properties.Resources.Eraser;
 			this.toolStripButtonEraser.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonEraser.Name = "toolStripButtonEraser";
 			this.toolStripButtonEraser.Size = new System.Drawing.Size(23, 28);
@@ -437,7 +457,6 @@
 			this.toolStripDropDownConductor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemAdd,
             this.toolStripMenuItemChange});
-			this.toolStripDropDownConductor.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownConductor.Image")));
 			this.toolStripDropDownConductor.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripDropDownConductor.Name = "toolStripDropDownConductor";
 			this.toolStripDropDownConductor.Size = new System.Drawing.Size(75, 28);
@@ -456,26 +475,6 @@
 			this.toolStripMenuItemChange.Size = new System.Drawing.Size(179, 22);
 			this.toolStripMenuItemChange.Text = "Изменить текущий";
 			this.toolStripMenuItemChange.Click += new System.EventHandler(this.toolStripMenuItemChange_Click);
-			// 
-			// textBoxLengths
-			// 
-			this.textBoxLengths.AcceptsReturn = true;
-			this.textBoxLengths.Enabled = false;
-			this.textBoxLengths.Location = new System.Drawing.Point(6, 251);
-			this.textBoxLengths.Multiline = true;
-			this.textBoxLengths.Name = "textBoxLengths";
-			this.textBoxLengths.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxLengths.Size = new System.Drawing.Size(216, 64);
-			this.textBoxLengths.TabIndex = 19;
-			// 
-			// labelConductorMaterialLength
-			// 
-			this.labelConductorMaterialLength.AutoSize = true;
-			this.labelConductorMaterialLength.Location = new System.Drawing.Point(6, 235);
-			this.labelConductorMaterialLength.Name = "labelConductorMaterialLength";
-			this.labelConductorMaterialLength.Size = new System.Drawing.Size(103, 13);
-			this.labelConductorMaterialLength.TabIndex = 18;
-			this.labelConductorMaterialLength.Text = "Длина проводника";
 			// 
 			// WindowMain
 			// 
@@ -497,7 +496,7 @@
 			this.Controls.Add(this.tabControlField);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.HelpButton = true;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = global::ResistanceCalculator.Properties.Resources.Om;
 			this.KeyPreview = true;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
