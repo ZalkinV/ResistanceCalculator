@@ -1,12 +1,3 @@
-*.sln
 .vs
-
-#I had to list all the directories, as line "!ResistanceCalculator/.cs" doesn't work
-ResistanceCalculator/bin/
-ResistanceCalculator/obj/
-ResistanceCalculator/Properties/
-ResistanceCalculator/Resources/
-ResistanceCalculator/*.config
-ResistanceCalculator/*.resx
-ResistanceCalculator/*.csproj
-ResistanceCalculator/*.user
+bin/
+obj/
